@@ -56,11 +56,11 @@ chmod 755 build/shtool
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%{_sbindir}/php-module-install install %{_smodname} %{_sysconfdir}/php.ini
+%{_sbindir}/php4-module-install install %{_smodname} %{_sysconfdir}/php.ini
 
 %preun
 if [ "$1" = "0" ]; then
-	%{_sbindir}/php-module-install remove %{_smodname} %{_sysconfdir}/php.ini
+	%{_sbindir}/php4-module-install remove %{_smodname} %{_sysconfdir}/php.ini
 fi
 
 %files
