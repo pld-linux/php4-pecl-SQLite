@@ -1,25 +1,25 @@
 %define		_modname	SQLite
 %define		_status		stable
 %define		_smodname	sqlite
+%define		_sysconfdir	/etc/php4
+%define		extensionsdir	%{_libdir}/php4
 
 Summary:	%{_modname} - database bindings
 Summary(pl):	%{_modname} - powi±zania z baz± danych
 Name:		php4-pecl-%{_modname}
 Version:	1.0.3
-Release:	2
+Release:	3
 License:	PHP
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{_modname}-%{version}.tgz
 # Source0-md5:	3741cb211f9eb3f77de086e96d232e95
 URL:		http://pecl.php.net/package/SQLite/
-BuildRequires:	libtool
-BuildRequires:	php4-devel >= 4.0.0
-Requires:	php-common
+BuildRequires:	php4-devel >= 3:4.0.0
+BuildRequires:	rpmbuild(macros) >= 1.230
+%requires_eq_to php4-common php4-devel
+Requires:	%{_sysconfdir}/conf.d
 Obsoletes:	php-pear-%{_modname}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_sysconfdir	/etc/php4
-%define		extensionsdir	%{_libdir}/php4
 
 %description
 %{_modname} is a C library that implements an embeddable SQL database
@@ -48,23 +48,29 @@ phpize
 
 %install
 rm -rf $RPM_BUILD_ROOT
-cd %{_modname}-%{version}
-chmod 755 build/shtool
-%{__make} install INSTALL_ROOT=$RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/conf.d,%{extensionsdir}}
+%{__make} -C %{_modname}-%{version} install INSTALL_ROOT=$RPM_BUILD_ROOT
+cat <<'EOF' > $RPM_BUILD_ROOT%{_sysconfdir}/conf.d/%{_smodname}.ini
+; Enable %{_modname} extension module
+extension=%{_smodname}.so
+EOF
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%{_sbindir}/php4-module-install install %{_smodname} %{_sysconfdir}/php.ini
+[ ! -f /etc/apache/conf.d/??_mod_php4.conf ] || %service -q apache restart
+[ ! -f /etc/httpd/httpd.conf/??_mod_php4.conf ] || %service -q httpd restart
 
-%preun
-if [ "$1" = "0" ]; then
-	%{_sbindir}/php4-module-install remove %{_smodname} %{_sysconfdir}/php.ini
+%postun
+if [ "$1" = 0 ]; then
+	[ ! -f /etc/apache/conf.d/??_mod_php4.conf ] || %service -q apache restart
+	[ ! -f /etc/httpd/httpd.conf/??_mod_php4.conf ] || %service -q httpd restart
 fi
 
 %files
 %defattr(644,root,root,755)
 %doc %{_modname}-%{version}/README %{_modname}-%{version}/TODO %{_modname}-%{version}/CREDITS
 %doc %{_modname}-%{version}/sqlite.php %{_modname}-%{version}/tests
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/conf.d/%{_smodname}.ini
 %attr(755,root,root) %{extensionsdir}/%{_smodname}.so
