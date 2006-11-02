@@ -15,7 +15,7 @@ Source0:	http://pecl.php.net/get/%{_modname}-%{version}.tgz
 # Source0-md5:	3741cb211f9eb3f77de086e96d232e95
 URL:		http://pecl.php.net/package/SQLite/
 BuildRequires:	php4-devel >= 3:4.0.0
-BuildRequires:	rpmbuild(macros) >= 1.254
+BuildRequires:	rpmbuild(macros) >= 1.322
 %{?requires_php_extension}
 Requires:	%{_sysconfdir}/conf.d
 Obsoletes:	php-pear-%{_modname}
