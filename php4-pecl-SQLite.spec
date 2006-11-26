@@ -8,7 +8,7 @@ Summary:	%{_modname} - database bindings
 Summary(pl):	%{_modname} - powi±zania z baz± danych
 Name:		php4-pecl-%{_modname}
 Version:	1.0.3
-Release:	6
+Release:	8
 License:	PHP
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{_modname}-%{version}.tgz
@@ -18,6 +18,7 @@ BuildRequires:	php4-devel >= 3:4.0.0
 BuildRequires:	rpmbuild(macros) >= 1.322
 %{?requires_php_extension}
 Requires:	%{_sysconfdir}/conf.d
+Provides:	php(sqlite)
 Obsoletes:	php-pear-%{_modname}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
