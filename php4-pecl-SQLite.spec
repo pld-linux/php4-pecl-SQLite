@@ -5,7 +5,7 @@
 %define		extensionsdir	%{_libdir}/php4
 
 Summary:	%{_modname} - database bindings
-Summary(pl):	%{_modname} - powi±zania z baz± danych
+Summary(pl.UTF-8):   %{_modname} - powiÄ…zania z bazÄ… danych
 Name:		php4-pecl-%{_modname}
 Version:	1.0.3
 Release:	8
@@ -30,11 +30,11 @@ allows you to access %{_modname} databases from within PHP.
 
 In PECL status of this package is: %{_status}.
 
-%description -l pl
-%{_modname} jest napisan± w C bibliotek± implementuj±c± osadzon± bazê
-SQL. Programy konsolidowane z %{_modname} mog± mieæ dostêp do bazy SQL
+%description -l pl.UTF-8
+%{_modname} jest napisanÄ… w C bibliotekÄ… implementujÄ…cÄ… osadzonÄ… bazÄ™
+SQL. Programy konsolidowane z %{_modname} mogÄ… mieÄ‡ dostÄ™p do bazy SQL
 bez potrzeby uruchamiana kolejnego procesu RDBMS. To rozszerzenie
-pozwala na dostêp do baz SQLite z poziomu PHP.
+pozwala na dostÄ™p do baz SQLite z poziomu PHP.
 
 To rozszerzenie ma w PECL status: %{_status}.
 
