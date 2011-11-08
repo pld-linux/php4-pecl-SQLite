@@ -7,7 +7,7 @@ Summary:	%{_modname} - database bindings
 Summary(pl.UTF-8):	%{_modname} - powiązania z bazą danych
 Name:		php4-pecl-%{_modname}
 Version:	1.0.3
-Release:	8
+Release:	9
 License:	PHP
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{_modname}-%{version}.tgz
