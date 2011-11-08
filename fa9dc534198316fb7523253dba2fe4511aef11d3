@@ -1,0 +1,2 @@
+- it finally happened - PECL separated from PEAR and moved to its own
+  repository, thus changes in urls (s/pear/pecl/)
